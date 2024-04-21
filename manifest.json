@@ -1,0 +1,22 @@
+﻿{
+  "Name": "MultiSave - Continued",
+  "Author": "recon88",
+  "Version": "1.0.0",
+  "Description": "MultiSave - Continued",
+  "UniqueID": "recon88.MultiSave",
+  "EntryDll": "MultiSave.dll",
+  "MinimumApiVersion": "4.0.0",
+  "ModUpdater": {
+    "Repository": "StardewValleyMods",
+    "User": "recon88",
+    "Directory": "_releases",
+    "ModFolder": "MultiSave"
+  },
+  "UpdateKeys": [],
+  "Dependencies": [
+    {
+      "UniqueID": "Platonymous.ModUpdater",
+      "IsRequired": false
+    }
+  ]
+}
