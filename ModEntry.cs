@@ -7,8 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using static StardewValley.Menus.LoadGameMenu;
 using static StardewValley.Menus.LoadGameMenu.SaveFileSlot;
+using static StardewValley.Minigames.TargetGame;
 
 namespace MultiSave
 {
@@ -21,8 +23,8 @@ namespace MultiSave
         public static ModConfig Config;
 
         public static ModEntry context;
-        public static string folderPrefix = "recon88.MultiSave";
-        public static string backupFolderKey = "recon88.MultiSave/backupFolder";
+        public static string folderPrefix = "MultiSave";
+        public static string backupFolderKey = "MultiSave/backupFolder";
 
         public static SaveFileSlot currentSaveSlot;
         public static List<string> currentSaveBackupList = new();
@@ -82,7 +84,7 @@ namespace MultiSave
                 original: AccessTools.Method(typeof(SaveFileSlot), nameof(SaveFileSlot.Activate)),
                 prefix: new HarmonyMethod(typeof(SaveFileSlot_Activate_Patch).GetMethod(nameof(SaveFileSlot_Activate_Patch.Prefix)))
                 );
-
+            fixStructure();
         }
 
         private void GameLoop_DayStarted(object sender, StardewModdingAPI.Events.DayStartedEventArgs e)
@@ -190,6 +192,26 @@ namespace MultiSave
                 setValue: value => Config.MaxDaysOldToKeep = value
             );
 
+        }
+
+        private void fixStructure()
+        {
+            // This method renames the folders from aedenthorn.MultiSave to just MultiSave
+            var savepath = Path.Combine(Constants.SavesPath);
+            var sourcedirs = new DirectoryInfo(savepath).GetDirectories();
+            foreach (DirectoryInfo dir in sourcedirs)
+            {
+                var savedirs = dir.GetDirectories();
+                foreach (DirectoryInfo dir1 in savedirs)
+                {
+                    if (Path.GetFileName(dir1.Name).StartsWith("aedenthorn."))
+                    {
+                        var newname = dir1.Name.Split("aedenthorn.")[1];
+                        dir1.MoveTo(Path.Combine(dir.FullName, newname));
+                        this.Monitor.Log("Renamed save folder " + dir1.Name + " to " + newname + ". This is only done once to adopt to the new folder structure of the mod.", LogLevel.Warn);
+                    }
+                }
+            }
         }
     }
 }
