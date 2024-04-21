@@ -3,14 +3,9 @@ using StardewModdingAPI;
 using StardewModdingAPI.Utilities;
 using StardewValley;
 using StardewValley.Menus;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using System.Runtime.ConstrainedExecution;
 using static StardewValley.Menus.LoadGameMenu;
-using static StardewValley.Menus.LoadGameMenu.SaveFileSlot;
-using static StardewValley.Minigames.TargetGame;
 
 namespace MultiSave
 {

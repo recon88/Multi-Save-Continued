@@ -1,23 +1,12 @@
-﻿
-using HarmonyLib;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Sickhead.Engine.Util;
+﻿using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
-using StardewValley.Objects;
-using StardewValley.TerrainFeatures;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Xml.Linq;
-using static StardewValley.Menus.CharacterCustomization;
 using static StardewValley.Menus.LoadGameMenu;
-using static StardewValley.Minigames.TargetGame;
-using Object = StardewValley.Object;
 
 namespace MultiSave
 {
