@@ -17,7 +17,7 @@ namespace MultiSave
     public partial class ModEntry
     {
 
-        [HarmonyPatch(typeof(LoadGameMenu), new Type[] { })]
+        [HarmonyPatch(typeof(LoadGameMenu), new Type[] { typeof(string) })]
         [HarmonyPatch(MethodType.Constructor)]
         public class LoadGameMenu_Patch
         {
@@ -94,7 +94,7 @@ namespace MultiSave
                 saveBackupList.Clear();
                 AccessTools.FieldRefAccess<LoadGameMenu, List<MenuSlot>>(TitleMenu.subMenu as LoadGameMenu, "menuSlots").Clear();
                 AccessTools.FieldRefAccess<LoadGameMenu, int>(TitleMenu.subMenu as LoadGameMenu, "currentItemIndex") = 0;
-                AccessTools.Method(typeof(LoadGameMenu), "startListPopulation").Invoke(TitleMenu.subMenu, new object[] {""});
+                AccessTools.Method(typeof(LoadGameMenu), "startListPopulation").Invoke(TitleMenu.subMenu, new object[] { null });
                 (TitleMenu.subMenu as LoadGameMenu).UpdateButtons();
                 if (Game1.options.snappyMenus && Game1.options.gamepadControls)
                 {
@@ -209,6 +209,7 @@ namespace MultiSave
                             return false;
                         Game1.playSound("bigSelect");
                         currentSaveSlot = ((SaveFileSlot)___menuSlots[___currentItemIndex + i]);
+                        SMonitor.Log($"[INK] selected slot={currentSaveSlot?.Farmer?.slotName}", LogLevel.Warn);
                         ___menuSlots.Clear();
                         var files = GetSaveSlots(currentSaveSlot.Farmer.slotName, backups);
                         for (int j = 0; j < files.Count; j++)
@@ -216,6 +217,16 @@ namespace MultiSave
                             ___menuSlots.Add(new SaveFileSlot(__instance, files[j], files.Count - j));
                         }
 
+                        ___selected = -1;
+                        ___selectedForDelete = -1;
+                        __instance.deleteConfirmationScreen = false;
+                        __instance.UpdateButtons();
+
+                        if (Game1.options.snappyMenus && Game1.options.gamepadControls)
+                        {
+                            __instance.populateClickableComponentList();
+                            __instance.snapToDefaultClickableComponent();
+                        }
                         return false;
                     }
                 }
