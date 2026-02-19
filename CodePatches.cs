@@ -44,6 +44,7 @@ namespace MultiSave
                         downNeighborID = ((i < 3) ? -99998 : -1),
                         rightNeighborID = -99998
                     });
+                    SMonitor.Log("Postfix populateClickableComponentList", LogLevel.Warn);
                 }
                 __instance.populateClickableComponentList();
             }
@@ -67,12 +68,14 @@ namespace MultiSave
 
                 if (currentSaveSlot is null)
                 {
+                   // SMonitor.Log("Postfix if slot null", LogLevel.Warn);
                     var currentItemIndex = (int)AccessTools.Field(typeof(LoadGameMenu), "currentItemIndex").GetValue(___menu);
                     if (saveBackupList.Count > currentItemIndex + i && saveBackupList[currentItemIndex + i].Length > 0 && ___menu.deleteButtons.Count > i + 4)
                         ___menu.deleteButtons[i + 4].draw(b, Color.White * 0.75f, 1f, 0);
                 }
                 else if(__instance.Farmer?.modData.TryGetValue(backupFolderKey, out string backupFolder) == true)
                 {
+                   // SMonitor.Log("Postfix else if", LogLevel.Warn);
                     var info = new DirectoryInfo(backupFolder);
                     var date = info.CreationTime;
                     var dateString = date.ToShortDateString() + " " + date.ToShortTimeString();
@@ -170,13 +173,21 @@ namespace MultiSave
                     }
                     if (!__instance.deleteConfirmationScreen)
                     {
+                        //SMonitor.Log("!__instance.deleteConfirmationScreen", LogLevel.Warn);
+                       // SMonitor.Log((__instance.slotButtons.Count).ToString(), LogLevel.Warn);
+                        //SMonitor.Log((___menuSlots.Count).ToString(), LogLevel.Warn);
                         for (int j = 0; j < __instance.slotButtons.Count; j++)
                         {
+                            //SMonitor.Log("---for---", LogLevel.Warn);
+                            //SMonitor.Log((j).ToString(), LogLevel.Warn);
+                            //SMonitor.Log((__instance.slotButtons[j].containsPoint(x, y)).ToString(), LogLevel.Warn);
                             if (__instance.slotButtons[j].containsPoint(x, y) && j < ___menuSlots.Count)
                             {
+                                //SMonitor.Log("if1", LogLevel.Warn);
                                 SaveFileSlot menu_save_slot = ___menuSlots[___currentItemIndex + j] as LoadGameMenu.SaveFileSlot;
                                 if (menu_save_slot != null && menu_save_slot.versionComparison < 0)
                                 {
+                                    //SMonitor.Log("if2", LogLevel.Warn);
                                     menu_save_slot.redTimer = Game1.currentGameTime.TotalGameTime.TotalSeconds + 1.0;
                                     Game1.playSound("cancel");
                                 }
@@ -186,23 +197,29 @@ namespace MultiSave
                                     ___timerToLoad = ___menuSlots[___currentItemIndex + j].ActivateDelay;
                                     if (___timerToLoad > 0)
                                     {
+                                        //SMonitor.Log("if3", LogLevel.Warn);
                                         ___loading = true;
                                         ___selected = ___currentItemIndex + j;
                                         return false;
                                     }
+                                    //SMonitor.Log("return", LogLevel.Warn);
                                     ___menuSlots[___currentItemIndex + j].Activate();
                                     return false;
                                 }
                             }
                         }
+                        //SMonitor.Log("---for end---", LogLevel.Warn);
                     }
+                    //SMonitor.Log("end return", LogLevel.Warn);
                     ___currentItemIndex = Math.Max(0, Math.Min(___menuSlots.Count - 4, ___currentItemIndex));
                     return false;
                 }
                 for (int i = 0; i < 4; i++)
                 {
-                    if(__instance.deleteButtons.Count > i + 4 && __instance.deleteButtons[i + 4].containsPoint(x, y))
+                    SMonitor.Log(i + " adding menu slots", LogLevel.Warn);
+                    if (__instance.deleteButtons.Count > i + 4 && __instance.deleteButtons[i + 4].containsPoint(x, y))
                     {
+                        SMonitor.Log(__instance.deleteButtons.Count + "", LogLevel.Warn);
                         var backups = GetBackups(((SaveFileSlot)___menuSlots[___currentItemIndex + i]).Farmer.slotName);
                         if (!backups.Any())
                             return false;

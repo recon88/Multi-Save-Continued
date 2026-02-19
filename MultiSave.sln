@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36603.0 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiSave", "MultiSave.csproj", "{FF05911C-0BED-DD47-6F56-49C9A3468351}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF05911C-0BED-DD47-6F56-49C9A3468351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF05911C-0BED-DD47-6F56-49C9A3468351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF05911C-0BED-DD47-6F56-49C9A3468351}.Debug|x64.ActiveCfg = Debug|x64
+		{FF05911C-0BED-DD47-6F56-49C9A3468351}.Debug|x64.Build.0 = Debug|x64
+		{FF05911C-0BED-DD47-6F56-49C9A3468351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF05911C-0BED-DD47-6F56-49C9A3468351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF05911C-0BED-DD47-6F56-49C9A3468351}.Release|x64.ActiveCfg = Release|x64
+		{FF05911C-0BED-DD47-6F56-49C9A3468351}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04F8CFCF-A9CE-41B7-B33A-85FDB832B946}
+	EndGlobalSection
+EndGlobal

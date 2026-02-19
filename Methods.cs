@@ -70,6 +70,9 @@ namespace MultiSave
             foreach(var slot in menuSlots)
             {
                 saveBackupList.Add((slot as SaveFileSlot)?.Farmer?.slotName is not null ? GetBackups((slot as SaveFileSlot).Farmer.slotName) : new string[0]);
+                SMonitor.Log("--ReloadSaveBackupList--", LogLevel.Warn);
+                SMonitor.Log((slot as SaveFileSlot).Farmer.slotName, LogLevel.Warn);
+                SMonitor.Log("---", LogLevel.Warn);
             }
         }
         private static void ReloadDeleteButtons(LoadGameMenu __instance)
@@ -88,6 +91,7 @@ namespace MultiSave
                     downNeighborID = ((i < 3) ? -99998 : -1),
                     rightNeighborID = -99998
                 });
+                SMonitor.Log((i).ToString() + " added del button ", LogLevel.Warn);
             }
         }
 
