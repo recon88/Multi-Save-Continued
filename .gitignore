@@ -5,3 +5,13 @@
 /.vs/MultiSave
 /bin/Debug/net6.0
 /obj
+/.vs
+/MultiSave-Continued-2025/bin/Release/net6.0
+/MultiSave-Continued-2025/obj/Debug/net6.0
+/MultiSave-Continued-2025/obj/Release/net6.0
+/MultiSave-Continued-2025/obj
+/CodePatches.cs
+/IGenericModConfigMenuApi.cs
+/Methods.cs
+/ModConfig.cs
+/ModEntry.cs

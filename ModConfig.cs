@@ -11,4 +11,4 @@ namespace MultiSave
         public int MaxDaysOldToKeep { get; set; } = 7;
         public SButton SaveButton { get; set; } = SButton.None;
     }
-}
+} 

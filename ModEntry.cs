@@ -200,7 +200,7 @@ namespace MultiSave
                 foreach (DirectoryInfo dir1 in savedirs)
                 {
                     if (Path.GetFileName(dir1.Name).StartsWith("aedenthorn."))
-                    {
+                    { 
                         var newname = dir1.Name.Split("aedenthorn.")[1];
                         dir1.MoveTo(Path.Combine(dir.FullName, newname));
                         this.Monitor.Log("Renamed save folder " + dir1.Name + " to " + newname + ". This is only done once to adopt to the new folder structure of the mod.", LogLevel.Warn);
