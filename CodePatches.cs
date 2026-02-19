@@ -211,8 +211,11 @@ namespace MultiSave
                         currentSaveSlot = ((SaveFileSlot)___menuSlots[___currentItemIndex + i]);
                         ___menuSlots.Clear();
                         var files = GetSaveSlots(currentSaveSlot.Farmer.slotName, backups);
-                        ___menuSlots.AddRange(from file in files select new SaveFileSlot(__instance, file, ___menuSlots.Count+1));
-                        
+                        for (int j = 0; j < files.Count; j++)
+                        {
+                            ___menuSlots.Add(new SaveFileSlot(__instance, files[j], files.Count - j));
+                        }
+
                         return false;
                     }
                 }
