@@ -141,22 +141,22 @@ namespace MultiSave
 
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Mod Enabled",
+                name: () => Helper.Translation.Get("config-mod-enabled"),
                 getValue: () => Config.EnableMod,
                 setValue: value => Config.EnableMod = value
             );
 
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Save Daily",
+                name: () => Helper.Translation.Get("config-save-daily"),
                 getValue: () => Config.AutoSaveDaily,
                 setValue: value => Config.AutoSaveDaily = value
             );
 
             configMenu.AddNumberOption(
                 mod: ModManifest,
-                name: () => "Save On Day of Week",
-                tooltip: () => "0 = disabled",
+                name: () => Helper.Translation.Get("config-save-on-day-of-the-week"),
+                tooltip: () => Helper.Translation.Get("config-0-equals-disabled"),
                 getValue: () => Config.AutoSaveOnDayOfWeek,
                 setValue: value => Config.AutoSaveOnDayOfWeek = value,
                 min: 0,
@@ -165,8 +165,8 @@ namespace MultiSave
 
             configMenu.AddNumberOption(
                 mod: ModManifest,
-                name: () => "Save On Day of Month",
-                tooltip: () => "0 = disabled",
+                name: () => Helper.Translation.Get("save-on-day-of-month"),
+                tooltip: () => Helper.Translation.Get("config-0-equals-disabled"),
                 getValue: () => Config.AutoSaveOnDayOfMonth,
                 setValue: value => Config.AutoSaveOnDayOfMonth = value,
                 min: 0,
@@ -175,14 +175,14 @@ namespace MultiSave
 
             configMenu.AddKeybind(
                 mod: ModManifest,
-                name: () => "Save Button",
+                name: () => Helper.Translation.Get("config-save-button"),
                 getValue: () => Config.SaveButton,
                 setValue: value => Config.SaveButton = value
             );
 
             configMenu.AddNumberOption(
                 mod: ModManifest,
-                name: () => "Max Days Old",
+                name: () => Helper.Translation.Get("config-max-days-old"),
                 getValue: () => Config.MaxDaysOldToKeep,
                 setValue: value => Config.MaxDaysOldToKeep = value
             );
