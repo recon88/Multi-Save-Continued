@@ -129,15 +129,14 @@ namespace MultiSave
             {
                 if (!Config.EnableMod || currentSaveSlot is null)
                     return true;
+                
                 SaveFileSlot slot = ___menuSlots[which] as SaveFileSlot;
-                if (slot == null)
+                if (slot?.Farmer?.modData.TryGetValue(backupFolderKey, out string fullFilePath) == true)
                 {
-                    return false;
-                }
-                string fullFilePath = slot.Farmer.modData[backupFolderKey];
-                if (Directory.Exists(fullFilePath))
-                {
-                    Directory.Delete(fullFilePath, true);
+                    if (Directory.Exists(fullFilePath))
+                    {
+                        Directory.Delete(fullFilePath, true);
+                    }
                 }
                 return false;
             }
@@ -209,7 +208,6 @@ namespace MultiSave
                             return false;
                         Game1.playSound("bigSelect");
                         currentSaveSlot = ((SaveFileSlot)___menuSlots[___currentItemIndex + i]);
-                        SMonitor.Log($"[INK] selected slot={currentSaveSlot?.Farmer?.slotName}", LogLevel.Warn);
                         ___menuSlots.Clear();
                         var files = GetSaveSlots(currentSaveSlot.Farmer.slotName, backups);
                         for (int j = 0; j < files.Count; j++)
@@ -268,8 +266,12 @@ namespace MultiSave
             {
                 if (!Config.EnableMod || currentSaveSlot is null)
                     return true;
+
+                // Defensivprüfung, falls ein "fremder" Slot ohne unseren Key aktiviert wird
+                if (__instance.Farmer == null || !__instance.Farmer.modData.TryGetValue(backupFolderKey, out string backupFolderPath))
+                    return true;
+
                 var newFolder = Path.Combine(Constants.SavesPath, currentSaveSlot.Farmer.slotName, GetFolderName(currentSaveSlot.Farmer));
-                var backupFolderPath = __instance.Farmer.modData[backupFolderKey];
                 var currentFolderPath = Path.Combine(Constants.SavesPath, currentSaveSlot.Farmer.slotName);
                 var tempDir = Path.Combine(Constants.SavesPath, currentSaveSlot.Farmer.slotName + "_tmp");
 
